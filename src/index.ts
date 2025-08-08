@@ -99,7 +99,7 @@ app.get("/", (_, res: Response) => {
         <h2>💡 Why Use This Backend?</h2>
         <div class="features">
           <div class="feature-card">
-            <h3>⚡ Fast</h3>
+            <h3>⚡ Fast and Furious</h3>
             <p>Built on Express and optimized for performance.</p>
           </div>
           <div class="feature-card">
