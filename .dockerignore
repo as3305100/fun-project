@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+dist
+
+# Git
+.git
+.gitignore
+
+# Docker & Compose
+Dockerfile*
+compose*.yaml
+
+# CI/CD & Local Hooks
+.github/
+.husky/

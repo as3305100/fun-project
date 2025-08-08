@@ -1,0 +1,19 @@
+
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    networks:
+      - anurag
+
+networks:
+  anurag:
+    driver: bridge
