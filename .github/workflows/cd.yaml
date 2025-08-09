@@ -47,3 +47,30 @@ jobs:
           password: ${{secrets.DOCKERHUB_PASSWORD}}
       - name: Push docker image to Docker Hub
         run: docker push ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
+
+  deploy:
+    name: Deploy the image to Docker Swarm Cluster
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: as3305100/fun-project-app
+      IMAGE_TAG: build-${{github.sha}}
+    needs:
+      - build-and-push
+    steps:
+      - name: SSH into the server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{secrets.SWARM_MANAGER_HOST}}
+          username: ${{secrets.SWARM_HOST_USERNAME}}
+          key: ${{secrets.SWARM_HOST_SSH_KEY}}
+          port: ${{secrets.SWARM_HOST_SSH_PORT}}
+          script: |
+               set -e
+               cd ~/funny
+
+               # pull compose file using git
+               git fetch origin main
+               git checkout origin/main
+
+               sudo docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
+               sudo docker stack deploy -c compose.yaml funny
