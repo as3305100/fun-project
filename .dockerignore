@@ -6,10 +6,6 @@ dist
 .git
 .gitignore
 
-# Docker & Compose
-Dockerfile*
-compose*.yaml
-
 # CI/CD & Local Hooks
 .github/
 .husky/
