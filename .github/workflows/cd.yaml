@@ -65,10 +65,11 @@ jobs:
           key: ${{secrets.SWARM_HOST_SSH_KEY}}
           port: ${{secrets.SWARM_HOST_SSH_PORT}}
           script: |
-               set -e
+               set -e               
                cd ~/funny
 
                # pull compose file using git
+               
                git fetch origin main
                git checkout origin/main
 
