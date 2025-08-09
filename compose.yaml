@@ -1,6 +1,6 @@
 services:
   fun-app-server:
-    image: as3305100/fun-project-app:build-a35302532674b00dce94e9f8df806ba75c46c5cf
+    image: as3305100/fun-project-app:build-05b4e4407808b8f7a431fa8ba049bab505235ac6
     deploy:
       replicas: 2
       update_config:
