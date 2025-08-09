@@ -65,13 +65,21 @@ jobs:
           key: ${{secrets.SWARM_HOST_SSH_KEY}}
           port: ${{secrets.SWARM_HOST_SSH_PORT}}
           script: |
-               set -e               
-               cd ~/funny
+            set -e     
 
-               # pull compose file using git
-               
-               git fetch origin main
-               git checkout origin/main
+            # If folder does not exist or is not a git repo, clone fresh
+            if [ ! -d "~/funny/.git" ]; then
+                 rm -rf ~/funny
+                 git clone https://github.com/as3305100/fun-project.git ~/funny
+            fi
 
-               sudo docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
-               sudo docker stack deploy -c compose.yaml funny
+            cd ~/funny
+
+            # pull compose file using git
+
+            git fetch origin main
+            git checkout main
+            git pull origin main
+
+            sudo docker pull ${{env.IMAGE_NAME}}:${{env.IMAGE_TAG}}
+            sudo docker stack deploy -c compose.yaml funny
