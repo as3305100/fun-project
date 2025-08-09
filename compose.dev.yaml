@@ -1,6 +1,6 @@
 
 services:
-  backend:
+  fun-app-server:
     build:
       dockerfile: Dockerfile.dev
       context: .
