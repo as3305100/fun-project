@@ -1,0 +1,32 @@
+services:
+  fun-app-server:
+    image: as3305100/fun-project-app:latest
+    deploy:
+      replicas: 2
+      update_config:
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - "--no-verbose"
+        - "--tries=1"
+        - "--spider"
+        - http://localhost:3000/health
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    networks:
+      - fun-app-net
+
+networks:
+  fun-app-net: {}
