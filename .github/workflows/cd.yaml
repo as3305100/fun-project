@@ -66,11 +66,12 @@ jobs:
           port: ${{secrets.SWARM_HOST_SSH_PORT}}
           script: |
             set -e     
-
-            # If folder does not exist or is not a git repo, clone fresh
-            if [ ! -d "~/funny/.git" ]; then
-                 rm -rf ~/funny
-                 git clone https://github.com/as3305100/fun-project.git ~/funny
+            
+            # Ensure repo exists and is a valid git repo
+            if [ ! -d ~/funny/.git ]; then
+               echo "⚠️  Repo folder missing or not a git repo. Cloning fresh..."
+               rm -rf ~/funny
+               git clone https://github.com/as3305100/fun-project.git ~/funny
             fi
 
             cd ~/funny
