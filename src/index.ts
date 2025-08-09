@@ -90,7 +90,7 @@ app.get("/", (_, res: Response) => {
       </header>
 
       <section class="hero">
-        <h2>Welcome to the Future of Backend Development</h2>
+        <h2>Welcome to the Future of Backend Development with Anurag</h2>
         <p>This app is built with love using modern technologies like TypeScript and Express.</p>
         <a class="btn" href="/api">Try the API</a>
       </section>
