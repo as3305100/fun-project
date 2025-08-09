@@ -1,6 +1,6 @@
 services:
   fun-app-server:
-    image: as3305100/fun-project-app:latest
+    image: as3305100/fun-project-app:build-e4b20e15a44fd796a5a306cd39d5f887c3539ef6
     deploy:
       replicas: 2
       update_config:
@@ -14,19 +14,18 @@ services:
       test:
         - CMD
         - wget
-        - "--no-verbose"
-        - "--tries=1"
-        - "--spider"
+        - '--no-verbose'
+        - '--tries=1'
+        - '--spider'
         - http://localhost:3000/health
       interval: 10s
       timeout: 5s
       retries: 3
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - PORT=3000
     networks:
       - fun-app-net
-
 networks:
   fun-app-net: {}
